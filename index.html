@@ -1,0 +1,124 @@
+<!-- <!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بازی حدس عدد</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        input { padding: 5px; font-size: 16px; }
+        button { padding: 10px 15px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🎯 بازی حدس عدد 🎯</h1>
+    <p>یک عدد بین ۱ تا ۱۰۰ حدس بزن:</p>
+    <input type="number" id="guessInput">
+    <button onclick="checkGuess()">حدس بزن</button>
+    <p id="message"></p>
+
+    <script>
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            let userGuess = parseInt(document.getElementById('guessInput').value);
+            let message = document.getElementById('message');
+            attempts++;
+
+            if (userGuess === secretNumber) {
+                message.innerHTML = `🎉 تبریک! عدد ${secretNumber} درست بود. در ${attempts} تلاش حدس زدی!`;
+            } else if (userGuess > secretNumber) {
+                message.innerHTML = "🔽 عدد کمتر را امتحان کن.";
+            } else {
+                message.innerHTML = "🔼 عدد بزرگ‌تر را امتحان کن.";
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بازی حدس عدد توسط کامپیوتر</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        button { padding: 10px 15px; font-size: 16px; cursor: pointer; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🎯 بازی حدس عدد توسط کامپیوتر</h1>
+    <p>یک عدد بین ۱ تا ۱۰۰ در ذهنت انتخاب کن و دکمه "شروع" را بزن.</p>
+    <button onclick="startGame()">شروع</button>
+    <p id="question"></p>
+    <button onclick="higher()" id="higherBtn" style="display:none;">🔼 بزرگ‌تره</button>
+    <button onclick="lower()" id="lowerBtn" style="display:none;">🔽 کوچک‌تره</button>
+    <button onclick="correct()" id="correctBtn" style="display:none;">✅ درسته!</button>
+    <p id="message"></p>
+
+    <script>
+        let min, max, guess, attempts;
+        console.log(y);
+        console.log(x); 
+        function startGame() {
+            min = 1;
+            max = 100;
+            attempts = 0;
+            nextGuess();
+            document.getElementById('higherBtn').style.display = "inline-block";
+            document.getElementById('lowerBtn').style.display = "inline-block";
+            document.getElementById('correctBtn').style.display = "inline-block";
+            document.getElementById('message').innerHTML = "";
+        }
+
+        function nextGuess() {
+            if (min > max) {
+                document.getElementById('message').innerHTML = `😡 داری منو گول میزنی! بازی رو از اول شروع کن.`;
+                hideButtons();
+                return;
+            }
+
+            guess = Math.floor((min + max) / 2);
+            document.getElementById('question').innerHTML = `آیا عدد ${guess} است؟`;
+            attempts++;
+        }
+
+        function higher() {
+            if (guess >= max) {
+                document.getElementById('message').innerHTML = `❌ خطا! شما قبلاً گفتید که عدد کوچکتر است!`;
+                hideButtons();
+                return;
+            }
+            min = guess + 1;
+            nextGuess();
+        }
+
+        function lower() {
+            if (guess <= min) {
+                document.getElementById('message').innerHTML = `❌ خطا! شما قبلاً گفتید که عدد بزرگتر است!`;
+                hideButtons();
+                return;
+            }
+            max = guess - 1;
+            nextGuess();
+        }
+
+        function correct() {
+            document.getElementById('message').innerHTML = `🎉 کامپیوتر عدد ${guess} را در ${attempts} تلاش حدس زد!`;
+            hideButtons();
+        }
+
+        function hideButtons() {
+            document.getElementById('higherBtn').style.display = "none";
+            document.getElementById('lowerBtn').style.display = "none";
+            document.getElementById('correctBtn').style.display = "none";
+        }
+    </script>
+</body>
+</html>
+
+
